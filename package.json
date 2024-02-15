@@ -1,12 +1,13 @@
 {
-  "name": "noteapi",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "Notes API",
+  "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon backend/index.js",
     "start": "node backend/index.js",
-    "build": "npm install && npm run build --prefix frontend"
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
   "author": "",

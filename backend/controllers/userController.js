@@ -1,22 +1,22 @@
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 dotenv.config();
 
-const userModel = require("../models/user");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const SECRET_KEY = process.env.SECRET_KEY;
+import User from "../models/user.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+const SECRET_KEY = "qwertyuiopasdfghjklzxcvbnm";
 
 const signup = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
   try {
-    const existingUser = await userModel.findOne({ email: email });
+    const existingUser = await User.findOne({ email: email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const result = await userModel.create({
+    const result = await User.create({
       email: email,
       password: hashedPassword,
       firstName: firstName,
@@ -35,7 +35,7 @@ const signin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const existingUser = await userModel.findOne({ email: email });
+    const existingUser = await User.findOne({ email: email });
     if (!existingUser) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -57,4 +57,4 @@ const signin = async (req, res) => {
   }
 };
 
-module.exports = { signup, signin };
+export { signup, signin };

@@ -1,8 +1,8 @@
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 dotenv.config();
 
-const jwt = require("jsonwebtoken");
-const SECRET_KEY = process.env.SECRET_KEY;
+import jwt from "jsonwebtoken";
+const SECRET_KEY = "qwertyuiopasdfghjklzxcvbnm";
 
 const auth = (req, res, next)=>{
 
@@ -27,4 +27,4 @@ const auth = (req, res, next)=>{
 
 }
 
-module.exports = auth;
+export default auth;
