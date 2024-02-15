@@ -1,11 +1,14 @@
 const express = require("express");
-const app = express();
 const noteRouter = require("./routes/noteRoutes");
 const userRouter = require("./routes/userRoutes"); 
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
+const path = require("path");
 
+const dirname = path.resolve();
+
+const app = express();
 const mongoose = require("mongoose");
 
 app.use(express.json());
@@ -20,6 +23,8 @@ app.get("/", (req, res) =>{
 });
 
 const PORT = process.env.PORT || 5000;
+
+app.use(express.static(path.join(dirname, "/frontend/build")));
 
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>{
